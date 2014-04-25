@@ -1,5 +1,5 @@
 Assembler and virtual machine for running simple assembly programs.
-The list of supported instructions and their format are given in instruction_set.txt.
+The list of supported instructions and their format are given in resources/instruction_set.txt.
 
 Usage:
    -Compile assembler.c 
@@ -13,3 +13,13 @@ Usage:
        ./vm <your_filename>.bin
 
 Two example files (simple_test.asm, subroutine_test.asm) have been given for demonstration purposes.
+To run the examples, type the following commands while inside the src/main folder:
+  
+   gcc -o assembler assembler.c
+   ./assembler ../test/simple_test.asm ../test/simple_test.bin
+   ./assembler ../test/subroutine_test.asm ../test/subroutine_test.bin
+
+   gcc -o vm vm.c main.c
+   ./vm ../test/simple_test.bin
+   ./vm ../test/subroutine_test.bin
+

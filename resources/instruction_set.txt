@@ -1,0 +1,79 @@
+Tiny VM
+Instruction set
+
+0x00	sto	  stop                              The stop command for virtual machine
+                                                    Stops the advancement of the
+                                                    instructionPointer
+                                                    Returns -1
+
+0x01	rtm	  reg to mem	      reg1, reg2            reg1=mem addr, reg2=reg
+                                                    Copies the contents of the reg2 to 
+                                                    the memory address pointed by reg1
+
+0x02	mtr	  mem to reg	      reg1, reg2            reg1=reg, reg2=mem addr
+                                                    Copies the constents of the memory 
+                                                    address pointed by reg2 to reg1
+
+0x03	rtr	  reg to reg	      reg1, reg2
+                                                    Copies the contents of reg2 to reg1
+
+0x04	inc	  increment	        reg
+                                                    Increments the value in reg by 1
+
+0x05	dec	  decrement	        reg
+                                                    Decrements the value in reg by 1
+
+0x06	loa	  load register	    reg, val
+                                                    Loads the val to reg
+
+0x07	add	  add		            reg1, reg2, reg3      reg1=reg2+reg3
+                                                    Adds the reg2 and reg3 together and
+                                                    stores the result to reg1
+
+0x08	sub	  subtract	        reg1, reg2, reg3      reg1=reg2-reg3
+                                                    Subtracts reg3 from reg2 and stores
+                                                    the result to reg1
+
+0x09	mul	  multiply	        reg1, reg2, reg3      reg1=reg2*reg3
+                                                    Multiplies reg2 and reg3 together
+                                                    and stores the result to reg1
+
+0x0a	equ	  equals		        reg1, reg2, reg3      reg1=(reg2==reg3)
+                                                    Tests the equality of reg2 and reg3 
+                                                    and stores the result to reg1. 0 if
+                                                    FALSE and !0 if TRUE
+
+0x0b	neq	  not equal	        reg1, reg2, reg3      reg1=(reg2!=reg3)
+                                                    Tests the inequality of reg2 and reg3
+                                                    and stores the result to reg1.
+                                                    0 if FALSE and !0 if TRUE
+
+0x0c	grt	  greater than	    reg1, reg2, reg3      reg1=(reg2>reg3)
+                                                    Tests if reg2 is greater than reg3
+                                                    and stores the result to reg1.
+                                                    0 if FALSE and !0 if TRUE
+
+0x0d	jmp	  jump to	          reg                   reg=addr
+                                                    At next cycle, continues from the
+                                                    instruction pointed by reg
+
+0x0e	cjp	  cond jump	        reg1, reg2            reg1=cond, reg2=addr
+                                                    If reg1!=0, At next cycle, continues
+                                                    from the instruction pointed by reg2
+
+0x0f	jsb	  jump subroutine	  reg                   reg=addr
+                                                    Jumps to subroutine pointed by reg.
+                                                    Saves the states of the registers and
+                                                    instructionPointer to stateRegisters
+
+0x10	ret	  return                                  Returns from the subroutine and
+                                                    retrieves the states of the registers
+                                                    and the instructionPointer from stateRegisters
+
+0x11  pri   print int         reg                   Print the integer value in the reg
+
+0x12  prc   print char        reg                   Print the character value in the reg
+
+0x13  sci   scan int          reg                   Read the integer from stdin into the reg
+
+0x14  scc   scan char         reg                   Read the character from stdin into the reg
